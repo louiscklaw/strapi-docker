@@ -40,6 +40,8 @@ if [ "$1" = "strapi" ]; then
 
 fi
 
+/usr/local/bin/wait-for-it.sh db:5432 -t 180
+
 echo "Starting your app..."
 
 exec "$@"

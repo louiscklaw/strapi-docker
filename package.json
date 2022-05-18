@@ -6,7 +6,17 @@
   "author": "Alexandre Bodin <bodin.alex@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "gitUpdate": "git add . && git commit -m\"update docker config,\" && git pull && git push",
+    "gitSync": "git fetch --all && git pull ",
+    "docker_network_prune": "docker network prune",
+    "docker_compose_pull": "docker-compose pull",
+    "docker_compose_build": "docker-compose build",
+    "docker_compose_kill": "docker-compose kill",
+    "docker_compose_down": "docker-compose down --remove-orphans && npm run docker_network_prune",
+    "docker_compose_up": "docker network create traefik-proxy-network || true && docker-compose up ",
+    "docker_rebuild": "npm run docker_compose_pull && npm run docker_compose_build && npm run docker_compose_kill && npm run docker_compose_down && npm run docker_compose_up",
+    "docker_clear_volume":"sudo rm -rf ./volumes/strapi && mkdir -p ./volumes/strapi && touch ./volumes/strapi/.gitkeep"
   },
   "dependencies": {
     "chalk": "^2.4.2",
